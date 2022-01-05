@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.container-item {
+  flex: 1;
+}
+
+.long-text {
+  text-align: justify;
+  text-justify: auto;
+}
+
+.information {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.container-item-bar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.container-item-bar > a {
+  flex: 1;
+}
+
+img {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 1280px;
+  height: 720px;
+}

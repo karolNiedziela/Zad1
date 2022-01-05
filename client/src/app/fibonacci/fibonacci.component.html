@@ -1,0 +1,32 @@
+<div class="container">
+  <form
+    class="form"
+    [formGroup]="indexForm"
+    #ngForm="ngForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <label class="form-item" for="index">Enter your index: </label>
+    <input class="form-item" type="number" id="index" formControlName="index" />
+
+    <button class="form-item" type="submit">Submit</button>
+    <div *ngIf="index!.invalid && (index!.dirty || index!.touched)">
+      <div *ngIf="index!.errors?.['required']">Index is required.</div>
+      <div *ngIf="index!.errors?.['min']">Index cannot be lower than 1.</div>
+      <div *ngIf="index!.errors?.['max']">Index cannot be higher than 20.</div>
+    </div>
+  </form>
+
+  <div class="coefficients">
+    <b>Indexes I have seen:</b>
+    <div *ngFor="let coefficent of coefficents">
+      <span> {{ coefficent.value }}</span>
+    </div>
+  </div>
+
+  <div class="calculated">
+    <b>Calculated values: </b>
+    <div *ngFor="let value of values | keyvalue">
+      <span> For index {{ value.key }} I calculated {{ value.value }}</span>
+    </div>
+  </div>
+</div>

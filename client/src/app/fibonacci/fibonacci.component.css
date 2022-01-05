@@ -1,0 +1,25 @@
+.container {
+  width: 20%;
+  margin: 0 auto;
+}
+.form {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.coefficients {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.calculated {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  text-align: center;
+  margin-top: 10px;
+}

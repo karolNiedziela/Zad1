@@ -1,0 +1,45 @@
+version: "3"
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Secret1="
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./Backend
+    depends_on:
+      - mssql
+      - redis
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+80
+      - ASPNETCORE_HTTPS_PORT=44311
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=crypticpassword
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/dev_cert.pfx
+    ports:
+      - "50420:80"
+      - "44361:443"
+    volumes:
+      - ./conf.d/https/:/https/
+      - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets
+
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+    volumes:
+      - /app/node_modules
+      - ./client:/app
